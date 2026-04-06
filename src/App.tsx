@@ -1,7 +1,15 @@
 import "./App.css";
 
+const SearchBar = () => {
+  return <h1>here we search</h1>;
+};
+
 function App() {
-  return <h1>hello</h1>;
+  return (
+    <div>
+      <SearchBar />
+    </div>
+  );
 }
 
 export default App;
