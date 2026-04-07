@@ -17,7 +17,7 @@ const DropDown = ({ setHoveringBtn, buttonsAmount, hoveringBtn }) => {
 
           opacity: hoveringBtn === null ? 0 : 1,
 
-          transition: `transform 0.1s ease ${hoveringBtn === null ? "0.5s" : "0.05s"}, opacity 0.1s ease ${hoveringBtn !== null ? "0.15s" : "0.05s"}`,
+          transition: `transform .25s cubic-bezier(0.7, 0, 0.3, 1) ${hoveringBtn === null ? "0.5s" : "0.05s"}, opacity .125s ease ${hoveringBtn !== null ? ".35s" : ".05s"}`,
         }}
       />
     </div>
