@@ -1,4 +1,25 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import debounce from "../functions/debounce";
+
+const SearchInput = ({ setHoveringBtn }) => {
+  const debounceSearch = useMemo(
+    () =>
+      debounce((query) => {
+        console.log("Fetching with following query: ", query);
+      }, 1000),
+    [],
+  );
+
+  return (
+    <input
+      onChange={(e) => debounceSearch(e.target.value)}
+      type="text"
+      placeholder="Search..."
+      className="bg-olive-100 w-full p-2 outline-0"
+      onMouseEnter={() => setHoveringBtn(null)}
+    />
+  );
+};
 
 const DropDown = ({ setHoveringBtn, buttonsAmount, hoveringBtn }) => {
   return (
@@ -39,19 +60,14 @@ const SearchBar = ({
   const [hoveringBtn, setHoveringBtn] = useState(null);
 
   return (
-    <div className="h-[50vh] flex items-end justify-center">
+    <div className="h-[50vh] flex  justify-center">
       <div className="w-200">
         <form
           action=""
           className="group relative w-full h-max flex flex-col"
           onMouseLeave={() => setHoveringBtn(null)}
         >
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-olive-100 w-full p-2 outline-0"
-            onMouseEnter={() => setHoveringBtn(null)}
-          />
+          <SearchInput setHoveringBtn={setHoveringBtn} />
 
           <div
             className={`flex justify-between bg-olive-300 overflow-hidden
@@ -60,12 +76,13 @@ const SearchBar = ({
               transition:
                 hoveringBtn !== null &&
                 (hoveringBtn === 0 || hoveringBtn === buttonsAmount - 1)
-                  ? "border-radius 0.5s ease 0.05s"
+                  ? "border-radius .5s ease .16s"
                   : "border-radius 0s ease",
             }}
           >
             {placeholderButtons.map((btn, index) => (
               <input
+                key={index}
                 value={btn}
                 type="button"
                 name={btn}
