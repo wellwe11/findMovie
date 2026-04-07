@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// 3/search/movie?query=batman&include_adult=false&language=en-US&page=1'
+
 const useQuery = () => {
   const [searchType, setSearchType] = useState("search");
   const [queryType, setQueryType] = useState("movie");

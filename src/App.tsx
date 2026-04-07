@@ -16,17 +16,63 @@ const FETCH_SETTINGS = {
 
 const SearchBar = ({
   setters: {
-    setSearchType,
-    setQueryType,
-    setLanguage,
-    setPage,
-    setSearch,
-    setAdult,
+    setSearchType, // /search, /discover, /find
+    setQueryType, // movie/series
+    setSearch, // What we are searching for. If empty, do not search
+    setLanguage, // en-US etc.
+    setPage, // start at 1
+    setAdult, // Pornographic content (force to be false(disabled))
   },
 }) => {
   return (
-    <div className="bg-olive-500">
-      <h1>Hello there</h1>
+    <div className="h-[50vh] flex items-end justify-center">
+      <div className="bg-olive-300 w-200 rounded-4xl">
+        <form action="" className="w-full h-max flex flex-col">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="bg-olive-100 w-full p-2 outline-0"
+          />
+
+          <div className="flex justify-between bg-olive-300 rounded-b-2xl overflow-hidden">
+            <input
+              value="Movie"
+              type="button"
+              name="movie"
+              id="movie"
+              className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
+              style={{ transition: "background-color 0.15s ease-in-out" }}
+            />
+
+            <input
+              value="Language"
+              type="button"
+              name="lang"
+              id="lang"
+              className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
+              style={{ transition: "background-color 0.15s ease-in-out" }}
+            />
+
+            <input
+              value="Page"
+              type="button"
+              name="page"
+              id="page"
+              className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
+              style={{ transition: "background-color 0.15s ease-in-out" }}
+            />
+
+            <input
+              value="Year"
+              type="button"
+              name="year"
+              id="year"
+              className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
+              style={{ transition: "background-color 0.15s ease-in-out" }}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
