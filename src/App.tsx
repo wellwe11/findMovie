@@ -26,6 +26,7 @@ const SearchBar = ({
   },
 }) => {
   const placeholderButtons = ["Movie", "Language", "Year", "Genre"];
+  const buttonsAmount = placeholderButtons.length - 1;
   const [hoveringBtn, setHoveringBtn] = useState(null);
 
   return (
@@ -41,7 +42,13 @@ const SearchBar = ({
             placeholder="Search..."
             className="bg-olive-100 w-full p-2 outline-0"
           />
-          <div className="flex justify-between bg-olive-300 rounded-b-lg overflow-hidden">
+
+          <div
+            className={`flex justify-between bg-olive-300 overflow-hidden
+              ${hoveringBtn === 0 ? "rounded-br-lg" : hoveringBtn === buttonsAmount ? "rounded-bl-lg" : "rounded-b-lg"}
+          
+          `}
+          >
             {placeholderButtons.map((btn, index) => (
               <input
                 value={btn}
@@ -55,14 +62,19 @@ const SearchBar = ({
             ))}
           </div>
 
-          <div className="w-full h-50">
+          <div className="w-full h-50 relative">
             <div
-              className="bg-olive-100 group"
+              className="w-full h-full absolute z-0"
+              onMouseEnter={() => setHoveringBtn(null)}
+            />
+            <div
+              className="bg-olive-100 group rounded-b-lg"
               style={{
                 width: `calc(100% / ${placeholderButtons.length})`,
                 height: "100%",
 
                 transform: `translateX(${hoveringBtn * 100}%)`,
+
                 opacity: hoveringBtn === null ? 0 : 1,
 
                 transition: `transform 0.1s ease ${hoveringBtn === null ? "0.5s" : "0.05s"}, opacity 0.1s ease ${hoveringBtn !== null ? "0.15s" : "0.05s"}`,
