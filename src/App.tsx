@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import useFetch from "./hooks/useFetch";
 import useQuery from "./hooks/useQuery";
@@ -24,51 +25,48 @@ const SearchBar = ({
     setAdult, // Pornographic content (force to be false(disabled))
   },
 }) => {
+  const placeholderButtons = ["Movie", "Language", "Year", "Genre"];
+  const [hoveringBtn, setHoveringBtn] = useState(null);
+
   return (
     <div className="h-[50vh] flex items-end justify-center">
-      <div className="bg-olive-300 w-200 rounded-4xl">
-        <form action="" className="w-full h-max flex flex-col">
+      <div className="w-200">
+        <form
+          action=""
+          className="w-full h-max flex flex-col"
+          onMouseLeave={() => setHoveringBtn(null)}
+        >
           <input
             type="text"
             placeholder="Search..."
             className="bg-olive-100 w-full p-2 outline-0"
           />
+          <div className="flex justify-between bg-olive-300 rounded-b-lg overflow-hidden">
+            {placeholderButtons.map((btn, index) => (
+              <input
+                value={btn}
+                type="button"
+                name={btn}
+                id={btn + "navBtn"}
+                className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
+                style={{ transition: "background-color 0.15s ease-in-out" }}
+                onMouseEnter={() => setHoveringBtn(index)}
+              />
+            ))}
+          </div>
 
-          <div className="flex justify-between bg-olive-300 rounded-b-2xl overflow-hidden">
-            <input
-              value="Movie"
-              type="button"
-              name="movie"
-              id="movie"
-              className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
-              style={{ transition: "background-color 0.15s ease-in-out" }}
-            />
+          <div className="w-full h-50">
+            <div
+              className="bg-olive-100"
+              style={{
+                width: `calc(100% / ${placeholderButtons.length})`,
+                height: "100%",
 
-            <input
-              value="Language"
-              type="button"
-              name="lang"
-              id="lang"
-              className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
-              style={{ transition: "background-color 0.15s ease-in-out" }}
-            />
+                transform: `translateX(${hoveringBtn * 100}%)`,
+                opacity: hoveringBtn === null ? 0 : 1,
 
-            <input
-              value="Page"
-              type="button"
-              name="page"
-              id="page"
-              className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
-              style={{ transition: "background-color 0.15s ease-in-out" }}
-            />
-
-            <input
-              value="Year"
-              type="button"
-              name="year"
-              id="year"
-              className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
-              style={{ transition: "background-color 0.15s ease-in-out" }}
+                transition: `transform 0.1s ease ${hoveringBtn === null ? "0.5s" : "0.05s"}, opacity 0.1s ease ${hoveringBtn !== null ? "0.15s" : "0.05s"}`,
+              }}
             />
           </div>
         </form>
