@@ -1,7 +1,7 @@
-import { useState } from "react";
 import "./App.css";
 import useFetch from "./hooks/useFetch";
 import useQuery from "./hooks/useQuery";
+import SearchBar from "./components/searchbar";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const ACCESS_TOKEN = import.meta.env.VITE_TOKEN;
@@ -13,78 +13,6 @@ const FETCH_SETTINGS = {
     accept: "application/json",
     Authorization: `Bearer ${ACCESS_TOKEN}`,
   },
-};
-
-const SearchBar = ({
-  setters: {
-    setSearchType, // /search, /discover, /find
-    setQueryType, // movie/series
-    setSearch, // What we are searching for. If empty, do not search
-    setLanguage, // en-US etc.
-    setPage, // start at 1
-    setAdult, // Pornographic content (force to be false(disabled))
-  },
-}) => {
-  const placeholderButtons = ["Movie", "Language", "Year", "Genre"];
-  const buttonsAmount = placeholderButtons.length - 1;
-  const [hoveringBtn, setHoveringBtn] = useState(null);
-
-  return (
-    <div className="h-[50vh] flex items-end justify-center">
-      <div className="w-200">
-        <form
-          action=""
-          className="group relative w-full h-max flex flex-col"
-          onMouseLeave={() => setHoveringBtn(null)}
-        >
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-olive-100 w-full p-2 outline-0"
-          />
-
-          <div
-            className={`flex justify-between bg-olive-300 overflow-hidden
-              ${hoveringBtn === 0 ? "rounded-br-lg" : hoveringBtn === buttonsAmount ? "rounded-bl-lg" : "rounded-b-lg"}
-          
-          `}
-          >
-            {placeholderButtons.map((btn, index) => (
-              <input
-                value={btn}
-                type="button"
-                name={btn}
-                id={btn + "navBtn"}
-                className={`w-full h-full cursor-pointer py-4 ${hoveringBtn === index ? "group-hover:bg-olive-100" : ""}`}
-                style={{ transition: "background-color 0.15s ease-in-out" }}
-                onMouseEnter={() => setHoveringBtn(index)}
-              />
-            ))}
-          </div>
-
-          <div className="w-full h-50 relative">
-            <div
-              className="w-full h-full absolute z-0"
-              onMouseEnter={() => setHoveringBtn(null)}
-            />
-            <div
-              className="bg-olive-100 group rounded-b-lg"
-              style={{
-                width: `calc(100% / ${placeholderButtons.length})`,
-                height: "100%",
-
-                transform: `translateX(${hoveringBtn * 100}%)`,
-
-                opacity: hoveringBtn === null ? 0 : 1,
-
-                transition: `transform 0.1s ease ${hoveringBtn === null ? "0.5s" : "0.05s"}, opacity 0.1s ease ${hoveringBtn !== null ? "0.15s" : "0.05s"}`,
-              }}
-            />
-          </div>
-        </form>
-      </div>
-    </div>
-  );
 };
 
 function App() {
