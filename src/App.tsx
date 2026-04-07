@@ -2,8 +2,6 @@ import "./App.css";
 import useFetch from "./hooks/useFetch";
 import useQuery from "./hooks/useQuery";
 
-// search/movie?query=batman&include_adult=false&language=en-US&page=1
-
 const API_KEY = import.meta.env.VITE_API_KEY;
 const ACCESS_TOKEN = import.meta.env.VITE_TOKEN;
 const LINK = import.meta.env.VITE_LINK;
@@ -26,7 +24,11 @@ const SearchBar = ({
     setAdult,
   },
 }) => {
-  return <h1>here we search</h1>;
+  return (
+    <div className="bg-olive-500">
+      <h1>Hello there</h1>
+    </div>
+  );
 };
 
 function App() {
