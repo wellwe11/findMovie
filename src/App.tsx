@@ -33,7 +33,7 @@ const SearchBar = ({
       <div className="w-200">
         <form
           action=""
-          className="w-full h-max flex flex-col"
+          className="group relative w-full h-max flex flex-col"
           onMouseLeave={() => setHoveringBtn(null)}
         >
           <input
@@ -48,7 +48,7 @@ const SearchBar = ({
                 type="button"
                 name={btn}
                 id={btn + "navBtn"}
-                className="w-full h-full cursor-pointer hover:bg-olive-100 py-4"
+                className={`w-full h-full cursor-pointer py-4 ${hoveringBtn === index ? "group-hover:bg-olive-100" : ""}`}
                 style={{ transition: "background-color 0.15s ease-in-out" }}
                 onMouseEnter={() => setHoveringBtn(index)}
               />
@@ -57,7 +57,7 @@ const SearchBar = ({
 
           <div className="w-full h-50">
             <div
-              className="bg-olive-100"
+              className="bg-olive-100 group"
               style={{
                 width: `calc(100% / ${placeholderButtons.length})`,
                 height: "100%",
